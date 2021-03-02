@@ -1,8 +1,0 @@
-[submodule "module"]
-	path = old-dist
-	url = http://gitea.localhost:8080/ipfs/QmPhL5Yj5Jpff1NQGgXrwFoRQT1Jy7vjxvUP8X1knizgzd/lifetm.tk.git
-	url = http://gitea.localhost:8080/ipfs/QmbiTNG1boyqJ8UV6B2xFZLoHADDz6rW1XRHvNzmzqPZkL/lifetm.tk.git
-  url = http://gitea.localhost:8080/ipfs/QmUDix3m9hZBv3DkCZaxhJM4e4m5KLDi3M1RWeSdXREkWR/lifetm.tk.git
-[submodule "dist"]
-	path = dist
-  url = http://gitea.localhost:8080/ipns/k2k4r8nvh0oos2vmroawa9lnzqm7g5hqchw835soaz1hjcp586wzaeox/lifetm.tk.git
