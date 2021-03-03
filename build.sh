@@ -10,14 +10,14 @@ keyid=${IPNS_KEYID:-QmaNjQKyUuheZPMpL6qXGzSAXFiLx2vsnr6ipHvs968KDz}
 
 top=$(git rev-parse --show-toplevel) && echo top: $top
 cd $top
+echo -n ".git/config: "
+cat .git/config
+echo .
 echo -n "origin_url: "
 git remote get-url origin
 echo gitmodules:
 cat .gitmodules
 echo .
-
-git log -1 \
---pretty=format:'--- # git-commit-data%ncommit: "%H"%nauthor: "%an <%ae>"%ndate: "%ad"%nmessage: "%s"%n'
 
 repo_url=$(git -C $www remote get-url origin) && echo repo_url: $repo_url
 symb=${repo_url##*/} && echo symb: $symb
@@ -28,15 +28,28 @@ symb=${repo_url##*/} && echo symb: $symb
 
 set -x
 #git config pull.rebase false 
-git checkout $top/.gitmodules
+#git checkout $top/.gitmodules
 #git submodule update --init --remote --recursive $www
-git submodule update --remote $www
+#git submodule update --remote $www
+git submodule update $www
 set +x
 
-remote_url=$(git -C $www remote get-url origin) && echo remote_url: $remote_url
+set
 
-git -C $www log -1
-#curl --connect-timeout 2 --max-time 30 -L $remote/refs/heads/master
+
+cd $www
+git log -1 \
+--pretty=format:'--- # git-commit-data%ncommit: "%H"%nauthor: "%an <%ae>"%ndate: "%ad"%nmessage: "%s"%n' | tee git-info.yml
+
+
+www_git=$(git rev-parse --git-dir)
+head=$(cat $www_git/refs/heads/master) && echo head: $head
+origin=$(cat $www_git/refs/remotes/origin/master) && echo origin: $origin
+hologit=$(cat $www_git/refs/remotes/hologit/master) && echo hologit: $hologit
+
+sed -e "s/:repo_url/$repo_url/g" -e "s/:commit/$head/" index.htm > index.html
+
+
 
 exit $?;
 true
