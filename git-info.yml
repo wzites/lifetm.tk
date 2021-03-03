@@ -1,0 +1,5 @@
+--- # git-commit-data
+commit: "feb93c3bb36816ef11c20b2edd2faa88c9df716f"
+author: "Blanca P. Olesnevich <bolesnevich@blockringtm.gq>"
+date: "Wed Mar 3 06:44:48 2021 +0100"
+message: "changes build.sh to avoid time overun"
