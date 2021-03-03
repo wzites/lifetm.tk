@@ -44,8 +44,7 @@ git log -1 \
 
 www_git=$(git rev-parse --git-dir)
 head=$(cat $www_git/refs/heads/master) && echo head: $head
-origin=$(cat $www_git/refs/remotes/origin/master) && echo origin: $origin
-hologit=$(cat $www_git/refs/remotes/hologit/master) && echo hologit: $hologit
+find $www_git/refs -name master -exec cat {} \; -print
 
 sed -e "s/:repo_url/$repo_url/g" -e "s/:commit/$head/" index.htm > index.html
 
