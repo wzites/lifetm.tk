@@ -52,7 +52,7 @@ head=$(cat $www_git/refs/heads/master) && echo head: $head
 find $www_git/refs -name master -exec cat {} \; -print
 
 set -x
-sed -e "s,:repo_url,$repo_url,g" -e "s/:commit/$head/" index.htm > index.html
+sed -e "s,:repo_url,$repo_url,g" -e "s/:commit/$head/g" index.htm > index.html
 
 cd ..
 
