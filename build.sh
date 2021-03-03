@@ -53,7 +53,7 @@ find $www_git/refs -name master -exec cat {} \; -print
 set -x
 sed -e "s,:repo_url,$repo_url,g" -e "s/:commit/$head/" index.htm > index.html
 
-
+cd ..
 
 exit $?;
 true
