@@ -25,16 +25,20 @@ if [ "x$mod_url" != "x$repo_url" ]; then
  git submodule deinit -f $www
  gitdir=$(git rev-parse --git-dir) && echo gitdir: $gitdir
  rm -rf $gitdir/modules/$www
+ git submodule update --init --remote --recursive $www
  repo_url=$mod_url
+else
+ if [ -e once.sh ]; them
+  . ./once.sh
+ fi
+ git submodule update $www
 fi
 symb=${repo_url##*/} && echo symb: $symb
 
 
 #git config pull.rebase false 
 #git checkout $top/.gitmodules
-git submodule update --init --remote --recursive $www
 #git submodule update --remote $www
-#git submodule update $www
 repo_url=$(git -C $www remote get-url origin) & echo repo_url: $repo_url
 
 cd $www
