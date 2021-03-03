@@ -23,6 +23,7 @@ if [ "x$mod_url" != "x$repo_url" ]; then
  echo mod_url: $mod_url
  echo "repo_url: $repo_url (old)"
  git submodule deinit -f $www
+ git -C $www remote set-url --delete origin $repo_url
  gitdir=$(git rev-parse --git-dir) && echo gitdir: $gitdir
  rm -rf $gitdir/modules/$www
  git submodule update --init --remote --recursive $www
