@@ -7,6 +7,9 @@ www=public
 top=$(git rev-parse --show-toplevel) && echo top: $top
 cd $top
 git remote -v
+echo gitmodules:
+cat .gitmodules
+echo .
 
 git log -1 \
 --pretty=format:'--- # git-commit-data%ncommit: "%H"%nauthor: "%an <%ae>"%ndate: "%ad"%nmessage: "%s"%n' | tee git-info.yml
@@ -14,7 +17,9 @@ git log -1 \
 keyid=${IPNS_KEYID:-QmaNjQKyUuheZPMpL6qXGzSAXFiLx2vsnr6ipHvs968KDz}
 repo_url=$(git -C $www remote get-url origin) && echo repo_url: $repo_url
 symb=${repo_url##*/} && echo symb: $symb
+echo info/refs:
 curl --connect-timeout 2 --max-time 30 -sL https://ipfs.blockring™.ml/ipns/$keyid/$symb/info/refs
+echo .
 
 
 #git submodule deinit -f $www
