@@ -17,16 +17,20 @@ echo gitmodules:
 cat .gitmodules
 echo .
 
-repo_url=$(git -C $www remote get-url origin) && echo repo_url: $repo_url
+mod_url=$(git config submodule.$www.url)
+repo_url=$(git -C $www remote get-url origin)
+if [ "x$mod_url" != "x$repo_url" ]; then
+ echo mod_url: $mod_url
+ echo repo_url: $repo_url
+ git submodule deinit -f $www
+ gitdir=$(git rev-parse --git-dir) && echo gitdir: $gitdir
+ rm -rf $gitdir/modules/$www
+fi
 symb=${repo_url##*/} && echo symb: $symb
 
-#git submodule deinit -f $www
-#gitdir=$(git rev-parse --git-dir) && echo gitdir: $gitdir
-#rm -rf $gitdir/modules/$www
 
 #git config pull.rebase false 
 #git checkout $top/.gitmodules
-git submodule deinit $www
 git submodule update --init --remote --recursive $www
 #git submodule update --remote $www
 #git submodule update $www
