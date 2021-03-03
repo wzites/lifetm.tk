@@ -28,7 +28,7 @@ if [ "x$mod_url" != "x$repo_url" ]; then
  git submodule update --init --remote --recursive $www
  repo_url=$mod_url
 else
- if [ -e once.sh ]; them
+ if [ -e once.sh ]; then
   . ./once.sh
  fi
  git submodule update $www
