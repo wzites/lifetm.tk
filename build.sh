@@ -13,8 +13,6 @@ cd $top
 echo -n ".git/config: "
 cat .git/config
 echo .
-echo -n "origin_url: "
-git remote get-url origin
 echo gitmodules:
 cat .gitmodules
 echo .
@@ -26,16 +24,12 @@ symb=${repo_url##*/} && echo symb: $symb
 #gitdir=$(git rev-parse --git-dir) && echo gitdir: $gitdir
 #rm -rf $gitdir/modules/$www
 
-set -x
 #git config pull.rebase false 
 #git checkout $top/.gitmodules
-#git submodule update --init --remote --recursive $www
+git submodule deinit $www
+git submodule update --init --remote --recursive $www
 #git submodule update --remote $www
-git submodule update $www
-set +x
-
-set
-
+#git submodule update $www
 
 cd $www
 git log -1 \
@@ -46,6 +40,7 @@ www_git=$(git rev-parse --git-dir)
 head=$(cat $www_git/refs/heads/master) && echo head: $head
 find $www_git/refs -name master -exec cat {} \; -print
 
+set -x
 sed -e "s/:repo_url/$repo_url/g" -e "s/:commit/$head/" index.htm > index.html
 
 
